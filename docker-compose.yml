@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: coord-db
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: coordddb
+      MYSQL_USER: jimmy
+      MYSQL_PASSWORD: toor
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - coord-network
+  adminer:
+      image: adminer
+      ports:
+        - 50:8080
+      networks:
+        - coord-network
+volumes:
+  mariadb:
+
+networks:
+  coord-network:
+    driver: bridge
